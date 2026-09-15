@@ -182,6 +182,13 @@ for _p in (_PROJ / "pylibs", _PROJ / "common", ROOT):
 - 一键启动器已自动处理这两件事；手工跑时记得自己设。
 - 本机 PowerShell 的 .NET TLS 不可用（`Invoke-WebRequest` / `curl.exe` 连 HTTPS 会失败），
   **需要联网抓取时用 Python**（`urllib`/`requests` 正常）。
+- **受限沙箱里禁止建进程间管道**（`CreatePipe` → WinError 5）。两个后果：
+  1. 想**采集**子进程输出时不要用 `capture_output=True` / `$x = cmd`；改成让子进程
+     自己重定向到文件，再读文件。`tools/git_sync.py::_exec_git` 就是"先试管道、
+     失败退回临时文件"的现成写法，可直接照抄。
+  2. `git` 的**连远端**命令（`ls-remote` / `fetch` / `push` / `pull`）即使能起进程也会失败，
+     报 `cannot create standard input pipe for remote-https` —— 这是沙箱限制，不是 git 坏了、
+     更不是凭据问题。要联网操作 git 就放宽文件权限，或让用户双击启动器（不受此限制）。
 
 ---
 
@@ -202,20 +209,20 @@ for _p in (_PROJ / "pylibs", _PROJ / "common", ROOT):
 
 ## 4. 改动与验证
 
-- 改完代码跑：`launcher\40-运行全部测试.bat`，或按范围只跑一边（**用 `tools/run_tests.py`
+- 改完代码跑：`launcher\41-运行全部测试.bat`，或按范围只跑一边（**用 `tools/run_tests.py`
   分程序跑，不要直接 `python -m pytest`** —— pytest 本身装在 `pylibs/`，直接调 `-m pytest`
   会报 `No module named pytest`；`run_tests.py` 会把 `pylibs`+`common`+四个程序目录经
   `PYTHONPATH` 传给子进程）：
 
   | 范围 | 命令 | 用例数 |
   |---|---|---|
-  | 全部 | `python tools\run_tests.py` | 736 |
+  | 全部 | `python tools\run_tests.py` | 766 |
   | A 股 | `python tools\run_tests.py stock_market_A/tests` | 52 |
   | 港股 | `python tools\run_tests.py stock_market_HK/tests` | 121 |
   | 美股 | `python tools\run_tests.py stock_market_USA/tests` | 183 |
   | 多资产组合 | `python tools\run_tests.py stock_market_GLOBAL/tests` | 41 |
   | 共享层 | `python tools\run_tests.py common/tests` | 184（含 `futu/test_safe_trade.py` 16 个红线用例） |
-  | 启动器 | `python tools\run_tests.py tools/tests` | 155 |
+  | 启动器 + 同步 | `python tools\run_tests.py tools/tests` | 185（`test_launcher.py` 155 + `test_git_sync.py` 30） |
 
   必须手工跑 `-m pytest` 时，记得自己带上：
   `$env:PYTHONPATH="$PWD\pylibs;$PWD\common;$PWD\stock_market_A;$PWD\stock_market_HK;$PWD\stock_market_USA;$PWD\stock_market_GLOBAL"`。
