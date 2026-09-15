@@ -188,6 +188,18 @@ TASKS: tuple[Task, ...] = (
 
     Task("tests", "运行全部测试", "tools/run_tests.py", (),
          "共享层/引擎/因子/策略/风控/纸面/富途/MCP/港股/美股/多资产/启动器", "质量"),
+
+    # ---------------- 与 GitHub 同步(放在最后: 前面任务的编号保持不变) ----------------
+    # 注意 --yes: 启动器不是交互终端, 不能让脚本再等一次 y/N, 否则双击后卡住不动。
+    # 脚本内部仍会先把完整变更清单打印出来才动手(见 tools/git_sync.py 的设计要点 1)。
+    Task("git_push", "同步·推送到 GitHub", "tools/git_sync.py", ("push", "--yes"),
+         "提交本地改动并推送; 会先列出变更清单再动手", "同步到 GitHub"),
+    Task("git_pull", "同步·从 GitHub 拉取", "tools/git_sync.py", ("pull", "--yes"),
+         "把 GitHub 上的更新快进到本地; 本地有未提交改动时会拒绝", "同步到 GitHub"),
+    Task("git_status", "同步·查看同步状态", "tools/git_sync.py", ("status",),
+         "只读: 分支 / 领先落后 / 待提交清单, 不动任何文件", "同步到 GitHub"),
+    Task("git_login", "同步·登录 GitHub", "tools/git_sync.py", ("login",),
+         "第一次或凭据过期时用; 凭据存 Windows 凭据管理器, 本项目不存密码", "同步到 GitHub"),
 )
 
 BY_KEY = {t.key: t for t in TASKS}

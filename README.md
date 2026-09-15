@@ -20,6 +20,31 @@
 > 自动下单需自备券商 QMT/miniQMT（A股）或富途等合规通道并遵守程序化交易报备要求。
 > 设计取舍与自问自答见 `stock_market_A/docs/02_设计决策QA.md`。
 
+## 远端仓库与日常同步（私有库）
+
+代码托管在 GitHub 私有库：<https://github.com/dnsyxw/ZERO100-002_Quant_Trading>
+（分支 `main`，本地 `main` 已跟踪 `origin/main`）。
+
+**日常只需要双击，不用敲命令：**
+
+| 要做什么 | 双击 |
+|---|---|
+| 把本地改动提交并推送上去 | `启动.bat` → 「同步·推送到 GitHub」，或 `launcher\42-同步·推送到GitHub.bat` |
+| 把 GitHub 上的更新拉回本地 | `启动.bat` → 「同步·从 GitHub 拉取」，或 `launcher\43-同步·从GitHub拉取.bat` |
+| 只看状态（不动任何文件） | `launcher\44-同步·查看同步状态.bat` |
+| 第一次用 / 凭据失效了 | `launcher\45-同步·登录GitHub.bat` |
+
+同步逻辑的唯一真源是 `tools/git_sync.py`（用 `tools/launcher.py` 的 `TASKS` 注册任务）。
+它刻意**不做**这些事，以免帮倒忙：
+
+- 远端有本地没有的提交时**拒绝推送**（绝不 `--force` 覆盖别人的提交）；
+- 本地有未提交改动时**拒绝拉取**（绝不自动 `stash` 把改动藏起来）；
+- 不做自动 rebase、不做自动冲突合并。
+
+> `runtime/`、各市场的 `data/*cache/`、`pylibs/`、`_futu_raw/` 都在 `.gitignore` 里，
+> 属于运行态或可重建的下载产物，**不会**被推上去。唯一破例的是
+> `stock_market_GLOBAL/results/`（约 2 MB 回测产物，作为第 4 套程序的结论证据）。
+
 ## 目录结构
 
 **两套程序各自独立成目录，互不 import，可分别开发、分别修改、分别跑测试。**
