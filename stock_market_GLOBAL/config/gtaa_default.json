@@ -1,0 +1,48 @@
+{
+  "_readme": [
+    "多资产趋势组合 —— 推荐配置(见 stock_market_GLOBAL/docs/12_多资产趋势组合.md)。",
+    "这里只有策略自由度, 不含任何账号/密钥/资金量。",
+    "改 target_vol 就是改整个组合的风险刻度:",
+    "  0.10 -> 年化约 10.5%, 最大回撤约 24%  (保守)",
+    "  0.15 -> 年化约 13.2%, 最大回撤约 26%  (本文件默认)",
+    "  0.20 -> 年化约 14.7%, 最大回撤约 25%  (收益优先; >15% 后总仓位上限成为实际约束)",
+    "改 gross_max 才是改真正的杠杆上限; 实测 >2.5 后回撤开始明显上升而夏普不升。"
+  ],
+
+  "name": "gtaa_core",
+
+  "trend": {
+    "lookbacks": [63, 126, 252],
+    "vol_halflife": 120,
+    "mode": "cont",
+    "scale": 1.5
+  },
+
+  "alloc": {
+    "target_vol": 0.15,
+    "gross_max": 2.0,
+    "weight_cap": 0.35,
+    "group_cap": null,
+    "gating": "linear",
+    "vol_targeting": true,
+    "allow_short": false,
+    "cov_halflife": 60,
+    "cov_shrink": 0.3,
+    "scale_bounds": [0.1, 4.0]
+  },
+
+  "engine": {
+    "rebalance": "M",
+    "no_trade_band": 0.005,
+    "financing_spread": 0.015,
+    "cost_multiplier": 1.0,
+    "initial_nav": 1.0
+  },
+
+  "governor": {
+    "enabled": true,
+    "tiers": [[2.5, 0.6], [3.5, 0.3], [4.5, 0.0]],
+    "resume_in_vol": 1.25,
+    "min_multiplier": 0.0
+  }
+}

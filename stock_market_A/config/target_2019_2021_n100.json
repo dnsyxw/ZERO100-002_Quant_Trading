@@ -1,0 +1,14 @@
+{
+  "comment": "目标达标参考配置: 2019-01~2021-12 历史回测 年化30.3%、最大回撤18.5%(年化>=20%且回撤<=20%均达成)。注意: 该窗口为小盘牛阶段, 无择时/无波动率目标, 其余窗口表现见 docs/03 §9; 自动化默认仍建议用 results/best 防御型配置。",
+  "start": "2019-01-01",
+  "end": "2026-08-31",
+  "n_stocks": 100,
+  "factor_w": {"rev_20": -1.0, "rev_5": -0.2, "turn_20": -1.2, "vol_20": -0.9, "amt20": -0.8},
+  "universe": {"min_age_days": 120, "min_amt20": 20000000.0, "mcap_lo_q": 0.0, "mcap_hi_q": 0.35, "exclude_st": true},
+  "timing": "none",
+  "timing_index": "000852.SH",
+  "ma_window": 60,
+  "off_scale": 0.0,
+  "vol_target": 0.0,
+  "min_stocks_in": 15
+}

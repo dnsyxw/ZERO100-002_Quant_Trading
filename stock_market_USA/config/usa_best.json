@@ -1,0 +1,30 @@
+{
+  "market": "US",
+  "start": "2005-01-01",
+  "end": "2014-12-31",
+  "n_stocks": 50,
+  "factor_w": {
+    "mktcap_log": -1.0
+  },
+  "universe": {
+    "min_age_days": 250,
+    "min_adv": 10000000.0,
+    "min_price": 1.0,
+    "max_zero_vol_ratio": 0.1,
+    "exclude_spac": true,
+    "exclude_otc": true,
+    "max_ca_suspect20": 0.0,
+    "min_mktcap": 0.0,
+    "max_mktcap": 0.0,
+    "exclude_codes": []
+  },
+  "timing_index": ".INX",
+  "ma_window": 150,
+  "dd_stop": 0.0,
+  "dd_window": 252,
+  "vol_target": 0.15,
+  "vol_window": 20,
+  "off_scale": 0.0,
+  "min_stocks_in": 20,
+  "max_weight_per_stock": 0.0
+}

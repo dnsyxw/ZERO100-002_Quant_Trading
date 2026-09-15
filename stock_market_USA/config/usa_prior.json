@@ -1,0 +1,38 @@
+{
+  "market": "US",
+  "start": "2005-01-01",
+  "end": "2026-09-10",
+  "n_stocks": 100,
+  "factor_w": {
+    "mom_12_1": 1.0,
+    "ret_252": 0.3,
+    "rev_20": -0.7,
+    "rev_5": -0.2,
+    "vol_20": -0.7,
+    "ivol_capm": -0.7,
+    "max_ret_20": -0.5,
+    "vol_ratio_20": -0.3,
+    "turn_20": -0.2
+  },
+  "universe": {
+    "min_age_days": 250,
+    "min_adv": 10000000.0,
+    "min_price": 1.0,
+    "max_zero_vol_ratio": 0.1,
+    "exclude_spac": true,
+    "exclude_otc": true,
+    "max_ca_suspect20": 0.0,
+    "min_mktcap": 0.0,
+    "max_mktcap": 0.0,
+    "exclude_codes": []
+  },
+  "timing_index": ".INX",
+  "ma_window": 200,
+  "dd_stop": 0.0,
+  "dd_window": 252,
+  "vol_target": 0.15,
+  "vol_window": 20,
+  "off_scale": 0.0,
+  "min_stocks_in": 20,
+  "max_weight_per_stock": 0.0
+}

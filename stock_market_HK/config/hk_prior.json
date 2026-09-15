@@ -1,0 +1,30 @@
+{
+  "market": "HK",
+  "start": "2015-01-01",
+  "end": "2026-09-10",
+  "n_stocks": 80,
+  "factor_w": {
+    "rev_20": -1.0,
+    "rev_5": -0.3,
+    "vol_20": -0.9,
+    "vol_ratio_20": -0.5,
+    "ret_252": 0.3
+  },
+  "universe": {
+    "min_age_days": 120,
+    "min_adtv": 20000000.0,
+    "min_price": 1.0,
+    "max_zero_vol_ratio": 0.3,
+    "exclude_gem": true,
+    "exclude_codes": []
+  },
+  "timing_index": "HSI",
+  "ma_window": 120,
+  "dd_stop": 0.0,
+  "dd_window": 252,
+  "vol_target": 0.12,
+  "vol_window": 20,
+  "off_scale": 0.0,
+  "min_stocks_in": 15,
+  "max_weight_per_stock": 0.0
+}

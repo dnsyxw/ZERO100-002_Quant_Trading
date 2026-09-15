@@ -1,0 +1,55 @@
+{
+  "_readme": [
+    "多资产趋势组合 —— **现金版**(不使用任何融资)。",
+    "",
+    "为什么需要这个版本: AGENTS.md §0 红线 R1 规定 '绝对不允许进行任何融资',",
+    "即账户名义总仓位(gross)硬上限为 1.0。默认配置 gtaa_default.json 的目标仓位是",
+    "142.7%, 那需要保证金借款 —— 因此**默认配置在本项目里不可直接执行**,",
+    "实盘/模拟盘只允许用本文件的 gross_max=1.0。",
+    "",
+    "代价(实测量化, 见 docs/12 §3.3 风险刻度盘):",
+    "  加杠杆版(默认): 年化 13.19%, 最大回撤 25.60%, 夏普 0.91",
+    "  现金版(本文件): 年化  9.39%, 最大回撤 14.97%, 夏普 1.00",
+    "  即: 放弃约 3.8pp 年化, 换来回撤从 25.6% 降到 15.0%, 夏普反而更高。",
+    "",
+    "除 gross_max 外, 其余参数与 gtaa_default.json **逐字一致** —— 信号与相对权重不变,",
+    "只是整体不放大到现金之上。"
+  ],
+
+  "name": "gtaa_cash_only",
+
+  "trend": {
+    "lookbacks": [63, 126, 252],
+    "vol_halflife": 120,
+    "mode": "cont",
+    "scale": 1.5
+  },
+
+  "alloc": {
+    "target_vol": 0.15,
+    "gross_max": 1.0,
+    "weight_cap": 0.35,
+    "group_cap": null,
+    "gating": "linear",
+    "vol_targeting": true,
+    "allow_short": false,
+    "cov_halflife": 60,
+    "cov_shrink": 0.3,
+    "scale_bounds": [0.1, 4.0]
+  },
+
+  "engine": {
+    "rebalance": "M",
+    "no_trade_band": 0.005,
+    "financing_spread": 0.015,
+    "cost_multiplier": 1.0,
+    "initial_nav": 1.0
+  },
+
+  "governor": {
+    "enabled": true,
+    "tiers": [[2.5, 0.6], [3.5, 0.3], [4.5, 0.0]],
+    "resume_in_vol": 1.25,
+    "min_multiplier": 0.0
+  }
+}

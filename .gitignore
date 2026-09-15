@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+pylibs/
+.venv/
+venv/
+
+# 行情缓存(下载产物, 体积大)
+# 四个市场各自独立存放, 绝不混目录 —— 代码空间会撞车
+stock_market_A/data/cache/
+stock_market_HK/data/hk_cache/
+stock_market_USA/data/us_cache/
+data/raw/
+logs_pip_install.txt
+
+# 多资产组合程序的数据: 只挡 gl_cache(下载产物, 数 MB~数十 MB),
+# stock_market_GLOBAL/data 下其余文件(如手工维护的名单)照常入库
+stock_market_GLOBAL/data/gl_cache/
+
+# OS
+Thumbs.db
+.DS_Store
+.idea/
+.vscode/
+
+# 运行态(纸面账户 / 净值 / 下单留痕 / 风控状态)
+# runtime/ = 共享(富途网关日志与下单留痕, 含 OpenD 安装包); 三个程序各有一份自己的
+runtime/
+stock_market_A/runtime/
+stock_market_HK/runtime/
+stock_market_USA/runtime/
+orders/
+stock_market_A/orders/
+stock_market_HK/orders/
+stock_market_USA/orders/
+paper_trades/
+*.log
+
+# 回测结果与下载名单
+stock_market_A/results/
+stock_market_HK/results/
+stock_market_USA/results/
+codes_*.txt
+
+# 注意: stock_market_GLOBAL/results/ 【故意不挡】——
+# 组合程序(第 4 套)的净值/权重 CSV 是它唯一的产出证据(约 2 MB),
+# 上传后可在 GitHub 上直接复核回测结论; A/HK/USA 三套的 results 体积不可控, 仍然挡住。
+
+# 富途官方文档/Skills 包下载产物(可用 common/scripts/fetch_futu_docs.py 重建)
+_futu_raw/
+
+# 本地凭据(本项目不保存密码; 该文件仅为将来可能的外部集成预留)
+common/config/futu.secrets.json

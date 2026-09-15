@@ -1,0 +1,46 @@
+{
+  "_readme": [
+    "富途 OpenAPI 接入配置。此处只放『连接参数 + 风控参数』, 可以安全提交到 git。",
+    "账号密码与交易解锁密码一律不写入本文件: OpenD 必须人工启动并在 GUI 登录/解锁。",
+    "环境变量可覆盖同名配置: FUTU_HOST / FUTU_PORT / FUTU_MARKET / FUTU_TRD_ENV / FUTU_ACC_ID /",
+    "FUTU_ACC_INDEX / FUTU_SECURITY_FIRM / FUTU_SYNC_TIMEOUT / FUTU_ENABLE_REAL_TRADE /",
+    "FUTU_LOG_DIR / FUTU_ORDER_LOG",
+    "字段说明见 docs/07_富途OpenAPI接入.md"
+  ],
+
+  "host": "127.0.0.1",
+  "port": 11111,
+  "sync_query_timeout": 30.0,
+
+  "market": "CN",
+  "security_firm": "FUTUSECURITIES",
+
+  "trd_env": "SIMULATE",
+  "_acc_ids_note": [
+    "acc_ids 按市场固定资金账户 —— 2026-09-11 实测值(全部 SIMULATE):",
+    "  CN=15188193 (CASH, sim=STOCK)  HK=15188192 (CASH, sim=STOCK)  US=15188191 (MARGIN, STOCK_AND_OPTION)",
+    "为什么必须固定: 这台机器上还存在一个 **ACTIVE 的 REAL 账户 281756480643874935**",
+    "(REAL/MARGIN/auth=['HK','US','HKCC','SG','HKFUND','USFUND','JP'])。若把 acc_id 留 0,",
+    "富途会按“账户列表第一个 ACTIVE”自动挑, 一旦有人打开 enable_real_trade 就可能误用实盘账户。",
+    "acc_id 非 0 时覆盖 acc_ids; 两者都为 0 才走自动挑选(不推荐)。",
+    "换账户/查全部账户: 用 futu_accounts 工具或 launcher\\02-富途环境自检.bat --deep。"
+  ],
+  "acc_id": 0,
+  "acc_ids": {
+    "CN": 15188193,
+    "HK": 15188192,
+    "US": 15188191
+  },
+  "acc_index": 0,
+  "enable_real_trade": false,
+
+  "max_order_pct": 0.05,
+  "max_daily_buy_pct": 0.3,
+
+  "log_dir": "runtime/futu_appdata",
+  "order_log": "runtime/futu_orders.jsonl",
+  "watchlist_group": "全部",
+
+  "default_kline_max": 500,
+  "max_rows": 2000
+}

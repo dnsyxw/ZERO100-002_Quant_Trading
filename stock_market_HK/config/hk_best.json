@@ -1,0 +1,26 @@
+{
+  "market": "HK",
+  "start": "2015-01-01",
+  "end": "2021-12-31",
+  "n_stocks": 40,
+  "factor_w": {
+    "illiq_20": 1.0
+  },
+  "universe": {
+    "min_age_days": 120,
+    "min_adtv": 100000000.0,
+    "min_price": 1.0,
+    "max_zero_vol_ratio": 0.3,
+    "exclude_gem": true,
+    "exclude_codes": []
+  },
+  "timing_index": "HSI",
+  "ma_window": 120,
+  "dd_stop": 0.0,
+  "dd_window": 252,
+  "vol_target": 0.1,
+  "vol_window": 20,
+  "off_scale": 0.0,
+  "min_stocks_in": 15,
+  "max_weight_per_stock": 0.0
+}

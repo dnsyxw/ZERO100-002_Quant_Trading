@@ -1,0 +1,24 @@
+{
+  "start": "2015-01-01",
+  "end": "2026-08-31",
+  "n_stocks": 80,
+  "factor_w": {
+    "rev_20": -1.0,
+    "rev_5": -0.2,
+    "turn_20": -1.2,
+    "vol_20": -0.9,
+    "amt20": -0.8
+  },
+  "universe": {
+    "min_age_days": 120,
+    "min_amt20": 30000000.0,
+    "mcap_lo_q": 0.0,
+    "mcap_hi_q": 0.35,
+    "exclude_st": true
+  },
+  "timing": "ma",
+  "timing_index": "000852.SH",
+  "ma_window": 60,
+  "off_scale": 0.0,
+  "min_stocks_in": 15
+}

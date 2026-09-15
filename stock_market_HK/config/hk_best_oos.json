@@ -1,0 +1,63 @@
+{
+  "cfg": {
+    "market": "HK",
+    "start": "2022-01-01",
+    "end": "2026-09-10",
+    "n_stocks": 40,
+    "factor_w": {
+      "illiq_20": 1.0
+    },
+    "universe": {
+      "min_age_days": 120,
+      "min_adtv": 100000000.0,
+      "min_price": 1.0,
+      "max_zero_vol_ratio": 0.3,
+      "exclude_gem": true,
+      "exclude_codes": []
+    },
+    "timing_index": "HSI",
+    "ma_window": 120,
+    "dd_stop": 0.0,
+    "dd_window": 252,
+    "vol_target": 0.1,
+    "vol_window": 20,
+    "off_scale": 0.0,
+    "min_stocks_in": 15,
+    "max_weight_per_stock": 0.0
+  },
+  "metrics": {
+    "market": "HK",
+    "start": "2022-01-03",
+    "end": "2026-09-10",
+    "years": 4.68,
+    "total_return": -0.0678185452374217,
+    "annualized_return": -0.015271239716721174,
+    "max_drawdown": 0.16700042683649186,
+    "volatility": 0.06829120011049832,
+    "sharpe": -0.19116797994548074,
+    "calmar": -0.09144431547874464,
+    "annual_turnover": 4.673398696136962,
+    "annual_cost_ratio": 0.015964082746334023,
+    "n_trades": 2141,
+    "total_cost": 72091.477437421,
+    "n_codes_pool": 2490,
+    "n_codes_held": 321,
+    "avg_holdings": 19.81651376146789,
+    "target_met": false,
+    "yearly": {
+      "2022": 0.0,
+      "2023": -0.06547267997750106,
+      "2024": 0.025979668032107828,
+      "2025": 0.007082690043205719,
+      "2026": -0.029895101130785307
+    },
+    "benchmark": "HSI",
+    "bench_total_return": 0.07216922630747913,
+    "bench_annual_return": 0.015387045696079404,
+    "bench_max_drawdown": 0.41170853231222004,
+    "excess_annual": -0.03065828541280058,
+    "dd_series_max": 0.16700042683649186,
+    "tag": "N40/adtv1e+08/illiq/vt10%/MA120/OOS",
+    "elapsed_s": 5.5
+  }
+}
